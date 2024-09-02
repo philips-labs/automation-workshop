@@ -1,0 +1,64 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+  "name": "AATT Workshop",
+  "build": {
+    // Path is relative to the devcontainer.json file.
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [3000, 7007],
+
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend",
+      "onAutoForward": "openPreview"
+    },
+    "7007": {
+      "label": "Backend",
+      "onAutoForward": "ignore"
+    }
+  },
+
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolderBasename}-backstage-node_modules",
+      "target": "${containerWorkspaceFolder}/backstage/node_modules",
+      "type": "volume"
+    },
+    {
+      "source": "${localWorkspaceFolderBasename}-backstage-yarn-cache",
+      "target": "${containerWorkspaceFolder}/backstage/.yarn/cache",
+      "type": "volume"
+    }
+  ],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "yarn install",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "orta.vscode-jest",
+        "streetsidesoftware.code-spell-checker",
+        "intility.vscode-backstage"
+      ]
+    }
+  },
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+
+  "postCreateCommand": {
+    // Mounting volumes comes with permission issues, so we need to fix them
+    // to make sure that we can write to the mounted volumes when running in devcontainers
+    "fix_permissions": "sudo chown node backstage/node_modules && sudo chown node backstage/.yarn/cache"
+  }
+}

@@ -1,0 +1,44 @@
+site_name: "Automate All The Things"
+docs_dir: docs
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+nav:
+  - Introduction: "index.md"
+  - Getting Started: "getting-started.md"
+  - The Exercises:
+      - Part 1 - Creating a template: "part-1.md"
+      - Part 2 - Creating a new action: "part-2.md"
+      - Part 3 - Customize the UI: "part-3.md"
+  - Appendix: "appendix.md"
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
