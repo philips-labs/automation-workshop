@@ -2,6 +2,8 @@ site_name: "Automate All The Things"
 docs_dir: docs
 theme:
   name: material
+  icon:
+    logo: material/robot-industrial
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -12,6 +14,7 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: red
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -19,6 +22,7 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: red
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
@@ -29,7 +33,8 @@ nav:
       - Part 1 - Creating a template: "part-1.md"
       - Part 2 - Creating a new action: "part-2.md"
       - Part 3 - Customize the UI: "part-3.md"
-  - Appendix: "appendix.md"
+  - Appendix:
+      - Part 2 - Code: "appendix/part-2-code.md"
 markdown_extensions:
   - admonition
   - pymdownx.details
