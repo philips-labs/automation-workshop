@@ -34,9 +34,9 @@ Congratulations, you have created a new scaffolder plugin!
 
     You can see what other plugin types there are by running `yarn new`.
 
-## Register your plugin
+## Install your plugin
 
-The plugin won't do much on its own, we need to register it in the backend so
+The plugin won't do much on its own, we need to install it in the backend so
 that it gets loaded correctly.
 
 Firstly, add your package as a reference to the
@@ -112,22 +112,34 @@ and you should see `acme:example` in the list. (we will change this later!)
 ## Write your action
 
 Now we need to write our action. This is the code that will be executed when the
-action is run as part of a template.
+action is run as part of a template. We are going to use `example.ts` in our
+plugin as a starting point.
 
 First, update the definition of the action, changing the ID and description and
 removing the required inputs and properties definitions. We don't need them
-(yet). Your definition should something look like this:
+(yet). Your call to `createTemplateAction` should something look like this:
 
 ```typescript
-id: 'catscanner:randomcat',
-description: 'Downloads a random cat image into the workspace',
-schema: {
-  input: {
-    type: 'object',
-    required: [],
-    properties: {},
+return createTemplateAction<{
+  myParameter: string;
+}>({
+  id: "catscanner:randomcat",
+  description: "Downloads a random cat image into the workspace",
+  schema: {
+    input: {
+      type: "object",
+      required: [],
+      properties: {},
+    },
   },
-},
+  async handler(ctx) {
+    ctx.logger.info(
+      `Running example template with parameters: ${ctx.input.myParameter}`
+    );
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  },
+});
 ```
 
 Now need to implement the action code in the `handler` function in
@@ -143,7 +155,7 @@ log using `ctx.logger.info`.
 
 !!! tip "Unit Testing"
 
-    You should write unit tests for your action using the
+    You can and should write unit tests for your action using the
     [instructions in the backstage docs](https://backstage.io/docs/features/software-templates/writing-tests-for-actions).
 
 ## Use it in a template

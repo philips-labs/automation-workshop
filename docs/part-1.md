@@ -95,11 +95,7 @@ which will automatically register the actions and make them available to us. We
 need to add the following in `packages/backend/src/index.ts`
 
 ```typescript
-import gitHubActions from "@backstage/plugin-scaffolder-backend-module-github";
-
-...
-
-backend.add(gitHubActions());
+backend.add(import("@backstage/plugin-scaffolder-backend-module-github"));
 ```
 
 Now, we can then use the actions we just installed in our template and create a
@@ -116,19 +112,19 @@ a new repo using the `publish:github` action. Add the following to your
 
 !!! tip "Refreshing Template Changes"
 
-    The changes may not be immediately visible. You can the refresh the template by
-    going to the catalog, changing the "kind" filter to "Template", clicking on your
-    template and then clicking the refresh button in the about card.
+    The changes may not be immediately visible. You can the refresh the template
+    by going to the catalog, changing the "kind" filter to "Template", clicking
+    on your template and then clicking the refresh button in the about card.
 
 Now, go to your template, enter the repo details and it should create a new repo
 in GitHub for you.
 
 ??? Warning "Authentication"
 
-    Authentication is needed to enable your backstage to log into GitHub and create your repo.
-    If you are having issues go back to the Authentication section in Getting Started and ensure
-    you have a valid token. You will not be able to create new repos in philips-internal as by
-    default it tries to create public repos.
+    Authentication is needed to enable your backstage to log into GitHub and
+    create your repo. If you are having issues go back to the Authentication
+    section in Getting Started and ensure you have a valid token. You will only
+    be able to make repos in an org that you have access to create public repos.
 
 The above package installed a lot more actions than just the `publish:github`,
 [you can browse the rest of the available templates here](http://localhost:3000/create/actions).

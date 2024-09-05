@@ -68,6 +68,7 @@ We will create a new folder in `plugins/catscanner-react/src/components` to hold
 all of the files related to the extension. lets call this `RandomCatPix`.
 
 ```bash
+cd backstage/
 mkdir -p plugins/catscanner-react/src/components/RandomCatPix
 ```
 
@@ -80,9 +81,20 @@ component and the validation. These files are:
 - extensions.ts - contains the registration of the extension
 - index.ts - exports the extension to be used in the frontend
 
-Create the file `RandomCatPixExtension.tsx` with the following contents. This is
-the skeleton of our actual UI component and we will come back and extend this
-with our implementation later.
+We can create all these files by running the following commands:
+
+```bash
+# go to the root of the react plugin
+cd backstage/plugins/catscanner-react
+touch src/components/RandomCatPix/RandomCatPixExtension.tsx \
+  src/components/RandomCatPix/validation.ts \
+  src/components/RandomCatPix/schema.ts \
+  src/components/RandomCatPix/extensions.ts \
+  src/components/RandomCatPix/index.ts
+```
+
+`RandomCatPixExtension.tsx` - This is the skeleton of our react UI component and
+we will come back and extend this with our implementation later.
 
 ??? example "RandomCatPixExtension.tsx"
 
@@ -113,9 +125,9 @@ with our implementation later.
     };
     ```
 
-Create the file `validation.ts` with the following contents. This is the
-validation of the output of the component. Inside this function, you can check
-the value of the field and return an error if it is not valid.
+`validation.ts` - This is the validation of the output of the component. Inside
+this function, you can check the value of the field and return an error if it is
+not valid.
 
 ??? example "validation.ts"
 
@@ -133,9 +145,9 @@ the value of the field and return an error if it is not valid.
     ) => {};
     ```
 
-Create the file `schema.ts` with the following contents. The schema is optional,
-it allows backstage to know how to render this component, what inputs it takes.
-This enables the previewing of the component in the Custom Field Explorer.
+`schema.ts` - The schema is optional, it allows backstage to know how to render
+this component, what inputs it takes. This enables the previewing of the
+component in the Custom Field Explorer.
 
 ??? example "schema.ts"
 
@@ -152,12 +164,10 @@ This enables the previewing of the component in the Custom Field Explorer.
     };
     ```
 
-Now we need to create an `extensions.ts` file that will create the Field
-Extension registration. This brings together the ID, React component and
+`extensions.ts` - this will create the Field Extension registration that will be
+recognized by backstage. This brings together the ID, React component and
 validation into a single component that we will make available to the
 scaffolder.
-
-Create the `extensions.ts` file with the following contents.
 
 ??? example "extensions.ts"
 
@@ -179,8 +189,8 @@ Create the `extensions.ts` file with the following contents.
     );
     ```
 
-Now we need to export the component from the plugin by modifying the following
-files
+Now we need to export the component from the plugin by modifying the `index.ts`
+in the `RandomCatPix` folder and in the components folder.
 
 ```typescript
 // plugins/catscanner-react/src/components/RandomCatPix/index.ts
@@ -206,9 +216,10 @@ UI code that we will use to get a random cat image and display it for the user.
 You will want to look at the `useEffect` and `useState` react hooks to allow you
 to trigger the request to the API and store the result.
 
-You must also call the `onChange` function passed as a property to pass any
-output value along to the template. So you should call this each time change the
-rendered cat image.
+You must also call the `onChange` function passed as a props to notify backstage
+of the output value you want to use in the template. This does not have to be
+what you render directly in the UI, for example you can pass an ID but render a
+friendly name. So you should call this each time change the rendered cat image.
 
 !!! tip
 
@@ -218,6 +229,9 @@ rendered cat image.
 
 You do this in `packages/app/src/App.tsx`. You need to provide the
 `customFieldExtensions` as children to the `ScaffolderPage`.
+
+In `App.tsx` you should find a section that looks like this, where the
+scaffolder route is setup.
 
 ```tsx
 const routes = (
@@ -229,7 +243,9 @@ const routes = (
 );
 ```
 
-Should be changed to look something like this
+Currently it is empty as we do not have any custom UI components, only the built
+in ones. We need to change the setup to take in our new custom field extension
+so that the scaffolder is aware of it.
 
 ```tsx
 import { ScaffolderFieldExtensions } from "@backstage/plugin-scaffolder-react";
