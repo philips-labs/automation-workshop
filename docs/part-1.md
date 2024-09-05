@@ -73,7 +73,9 @@ file. You can add a new location under `catalog.locations` like below:
 ```
 
 You can then start your backstage instance and you should see the new template
-in the templates section.
+in the [templates section](http://localhost:3000/create?filters%5Bkind%5D=template&filters%5Buser%5D=all).
+
+![Cat scanner template](./assets/part_1_cat_scanner_template.png)
 
 ## Creating a repo
 
@@ -95,11 +97,7 @@ which will automatically register the actions and make them available to us. We
 need to add the following in `packages/backend/src/index.ts`
 
 ```typescript
-import gitHubActions from "@backstage/plugin-scaffolder-backend-module-github";
-
-...
-
-backend.add(gitHubActions());
+backend.add(import("@backstage/plugin-scaffolder-backend-module-github"));
 ```
 
 Now, we can then use the actions we just installed in our template and create a
@@ -116,19 +114,25 @@ a new repo using the `publish:github` action. Add the following to your
 
 !!! tip "Refreshing Template Changes"
 
-    The changes may not be immediately visible. You can the refresh the template by
-    going to the catalog, changing the "kind" filter to "Template", clicking on your
-    template and then clicking the refresh button in the about card.
+    The changes may not be immediately visible. You can the refresh the template
+    by going to the catalog, changing the "kind" filter to "Template", clicking
+    on your template and then clicking the refresh button in the about card.
 
 Now, go to your template, enter the repo details and it should create a new repo
-in GitHub for you.
+in GitHub for you. Use for "owner" your GitHub handle and choose a name for the repository. Once finished the template displays a link (TAKE ME TO THE REPO) to the newly created (private) repository.
+
+![Cat scanner repo](./assets/part_1_cat_scanner_repo.png)
+
+After this point we do not need the newly created repository anymore, so you can delete it in GitHub.
 
 ??? Warning "Authentication"
 
-    Authentication is needed to enable your backstage to log into GitHub and create your repo.
-    If you are having issues go back to the Authentication section in Getting Started and ensure
-    you have a valid token. You will not be able to create new repos in philips-internal as by
-    default it tries to create public repos.
+    Authentication is needed to enable your backstage to log into GitHub and
+    create your repo. If you are having issues go back to the Authentication
+    section in Getting Started and ensure you have a valid token. You will only
+    be able to make repos in an org that you have access to create public repos.
 
-The above package installed a lot more actions than just the `publish:github`,
-[you can browse the rest of the available templates here](http://localhost:3000/create/actions).
+!!! tip "Installed actions"
+
+    The above package installed a lot more actions than just the `publish:github`,
+    [you can browse the rest of the available templates here](http://localhost:3000/create/actions).
