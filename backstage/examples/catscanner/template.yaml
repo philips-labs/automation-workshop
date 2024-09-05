@@ -32,6 +32,10 @@ spec:
       input:
         message: Hello World
 
+    - id: download-cat-image
+      name: Download Cat Image
+      action: catscanner:randomcat
+
     - id: create-repo
       name: Create Repo
       action: publish:github

@@ -42,6 +42,7 @@
     "@backstage/plugin-search-backend-module-techdocs": "^0.2.0",
     "@backstage/plugin-search-backend-node": "^1.3.0",
     "@backstage/plugin-techdocs-backend": "^1.10.10",
+    "@internal/backstage-plugin-scaffolder-backend-module-cat-scaffolder": "link:../../plugins/scaffolder-backend-module-cat-scaffolder",
     "app": "link:../app",
     "better-sqlite3": "^9.0.0",
     "node-gyp": "^10.0.0",
