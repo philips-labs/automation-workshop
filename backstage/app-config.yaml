@@ -6,6 +6,9 @@ organization:
   name: My Company
 
 backend:
+  reading:
+    allow:
+      - host: cdn2.thecatapi.com
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format

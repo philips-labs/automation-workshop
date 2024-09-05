@@ -37,6 +37,9 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
+import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
+import { RandomCatPixFieldExtension } from '@internal/backstage-plugin-catscanner-react';
+
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
@@ -80,7 +83,11 @@ const routes = (
         <ReportIssue />
       </TechDocsAddons>
     </Route>
-    <Route path="/create" element={<ScaffolderPage />} />
+    <Route path="/create" element={<ScaffolderPage />}>
+      <ScaffolderFieldExtensions>
+        <RandomCatPixFieldExtension />
+      </ScaffolderFieldExtensions>
+    </Route>
     <Route path="/api-docs" element={<ApiExplorerPage />} />
     <Route
       path="/catalog-import"

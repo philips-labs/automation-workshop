@@ -22,6 +22,9 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+        randomCatUrl:
+          type: string
+          ui:field: RandomCatPix
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -32,9 +35,12 @@ spec:
       input:
         message: Hello World
 
-    - id: download-cat-image
-      name: Download Cat Image
-      action: catscanner:randomcat
+    - id: fetch-randomcat
+      name: Random Cat
+      action: fetch:plain:file
+      input:
+        url: ${{ parameters.randomCatUrl }}
+        targetPath: catimage.jpeg
 
     - id: create-repo
       name: Create Repo
