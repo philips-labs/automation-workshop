@@ -78,6 +78,10 @@ catalog:
   rules:
     - allow: [Component, System, API, Resource, Location]
   locations:
+    - type: file
+      target: ../../examples/catscanner/template.yaml
+      rules:
+        - allow: [Template]
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
       target: ../../examples/entities.yaml

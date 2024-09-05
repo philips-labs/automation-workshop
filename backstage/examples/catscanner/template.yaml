@@ -1,0 +1,45 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: catscanner-template
+  title: New CATScanner Repo
+  description: Create a new mood-boosting CATScanner Repo
+spec:
+  owner: user:guest
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: Create a new repo
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # These steps are executed in the scaffolder backend, using data that we gathered
+  # via the parameters above.
+  steps:
+    - id: debug
+      name: debug
+      action: debug:log
+      input:
+        message: Hello World
+
+    - id: create-repo
+      name: Create Repo
+      action: publish:github
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: Take me to the repo
+        url: ${{ steps['create-repo'].output.remoteUrl }}
