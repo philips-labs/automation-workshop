@@ -35,8 +35,10 @@ nav:
       - Part 1 - Creating a template: "part-1.md"
       - Part 2 - Creating a new action: "part-2.md"
       - Part 3 - Customize the UI: "part-3.md"
+  - Clean up: "clean-up.md"
   - Appendix:
       - Part 2 - Code: "appendix/part-2-code.md"
+      - Part 3 - Code: "appendix/part-3-code.md"
 markdown_extensions:
   - admonition
   - pymdownx.details

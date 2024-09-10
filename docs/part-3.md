@@ -190,12 +190,14 @@ scaffolder.
     ```
 
 Now we need to export the component from the plugin by modifying the `index.ts`
-in the `RandomCatPix` folder and in the components folder.
+in the `RandomCatPix` folder.
 
 ```typescript
 // plugins/catscanner-react/src/components/RandomCatPix/index.ts
 export { RandomCatPixFieldExtension } from "./extensions";
 ```
+
+Next we do the same in the `components` folder to export the `RandomCatPix`.
 
 ```typescript
 // plugins/catscanner-react/src/components/index.ts

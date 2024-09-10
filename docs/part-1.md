@@ -123,6 +123,8 @@ in GitHub for you. Use for "owner" your GitHub handle and choose a name for the 
 
 ![Cat scanner repo](./assets/part_1_cat_scanner_repo.png)
 
+After this point we do not need the newly created repository anymore, so you can delete it in GitHub.
+
 ??? Warning "Authentication"
 
     Authentication is needed to enable your backstage to log into GitHub and
