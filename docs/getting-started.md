@@ -85,9 +85,7 @@ Next we start the development environment by running the following command:
 yarn dev
 ```
 
-This should build and run the app and open a browser window for you. If it does
-not you can open a browser and navigate to `http://localhost:3000` to see the
-app running.
+Backstage will open in the browser and or VSCode pointing to `127.0.0.1` instead of `localhost`. Ensure you open the Backstage in your browser on `http://localhost:3000`.
 
 ![Backstage App](./assets/getting_started_app.png) 
 
