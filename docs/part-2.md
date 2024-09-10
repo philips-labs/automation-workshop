@@ -73,7 +73,7 @@ backend.add(
 Now we need to export your action correctly from the plugin for the "new
 backend" system.
 
-Create a new file in your plugin called `src\module.ts` containing the following
+Create a new file in your created plugin called `backstage/plugins/<your plugin>/src/module.ts` containing the following
 code
 
 ```typescript
@@ -120,26 +120,28 @@ removing the required inputs and properties definitions. We don't need them
 (yet). Your call to `createTemplateAction` should something look like this:
 
 ```typescript
-return createTemplateAction<{
-  myParameter: string;
-}>({
-  id: "catscanner:randomcat",
-  description: "Downloads a random cat image into the workspace",
-  schema: {
-    input: {
-      type: "object",
-      required: [],
-      properties: {},
+...
+  return createTemplateAction<{
+    myParameter: string;
+  }>({
+    id: "catscanner:randomcat",
+    description: "Downloads a random cat image into the workspace",
+    schema: {
+      input: {
+        type: "object",
+        required: [],
+        properties: {},
+      },
     },
-  },
-  async handler(ctx) {
-    ctx.logger.info(
-      `Running example template with parameters: ${ctx.input.myParameter}`
-    );
+    async handler(ctx) {
+      ctx.logger.info(
+        `Running example template with parameters: ${ctx.input.myParameter}`
+      );
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  },
-});
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    },
+  });
+...
 ```
 
 Now need to implement the action code in the `handler` function in
@@ -175,6 +177,12 @@ You can now test your cat downloading skills in the template! You should end up
 with a repo that has a single cat image in it.
 
 !!! tip "Don't forget to refresh your template!"
+
+??? tip "Hint"
+
+    Ensure you place the steps in the correct order. After running the automation you should see all the setps executed as well a link to the newly created repository.
+
+    ![Cat scanner repo with image](./assets/part_2_cat_scanner_repo.png)
 
 ## Bonus Round - Testing
 
