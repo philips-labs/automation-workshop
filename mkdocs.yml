@@ -4,6 +4,8 @@ theme:
   name: material
   icon:
     logo: material/robot-industrial
+  features:
+    - content.code.copy
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
