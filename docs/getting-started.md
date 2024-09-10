@@ -2,8 +2,9 @@
 
 ## Getting Started
 
-To get started with this workshop we are going to use Codespaces to set up our
-development environment.
+To get started with this workshop we are going to use
+[Codespaces](https://github.com/features/codespaces) to set up our development
+environment.
 
 !!! tip "Codespaces plugin for VSCode"
 
@@ -11,7 +12,8 @@ development environment.
     installation, this is because we will later connect your vscode instance to the
     codespace in GitHub.
 
-To use Codespaces we can go to the code button on the workshop repository and
+To use Codespaces we can go to the code button on the
+[workshop repository](https://github.com/philips-labs/automation-workshop) and
 select the Codespaces tab. Clicking create an new Codespaces will start out the
 building and starting of your own Codespace. After a while you will have running
 and working environment which you can see from the VSCode instance in your
@@ -25,6 +27,12 @@ the files from the codespace in your local vscode.
 
 Once have you connected your vscode you can then continue with the rest of the
 instructions here.
+
+??? Note "Codespaces"
+
+    During the workshop we use GitHub Codespaces to provide a consistent and easy to
+    use environment for the workshop. GitHub is charging you for Codespaces usage, but
+    also provide a free tier including 120 core-hours per month. You can check the details on the [GitHub billing page](https://github.com/settings/billing/summary). To avoid you make unnecessary costs, Codespaces will be automatically stopped after 30 minutes of inactivity. Check the [Codespace settings page](https://github.com/settings/codespaces) to see your Codespaces and adjust settings.
 
 ## Creating a new Backstage app
 
@@ -61,8 +69,19 @@ in the next step.
 Once the yarn installation is complete, you can start the app by running the
 following command:
 
+??? Note "Without Yarn 4 Migration"
+
+    If you did not migrate to yarn 4 you can run the following command to start
+    the app.
+
+    ```bash
+    cd backstage
+    yarn install
+    yarn dev
+    ```
+
+Next we start the development environment by running the following command:
 ```bash
-cd backstage
 yarn dev
 ```
 
@@ -70,7 +89,9 @@ This should build and run the app and open a browser window for you. If it does
 not you can open a browser and navigate to `http://localhost:3000` to see the
 app running.
 
-Once you have a running installation we can move to the first exercise!
+![Backstage App](./assets/getting_started_app.png) 
+
+Once you have a running installation we can move to the first exercise! In case you don't see the Backstage app running, please check the following:
 
 ??? Note "Working Directory"
 
@@ -81,9 +102,9 @@ Once you have a running installation we can move to the first exercise!
 
     Backstage is running two processes exposed in the the container on port 3000
     and 7007. The codespace is mapping the ports to your local ports. Ensure
-    you have no other processes running on those ports.
+    you have no other processes running on those ports and both ports are mapped.
 
-??? Note Node 20
+??? Note "Node 20"
 
     If you are running node 20 you will need to set the `NODE_OPTIONS=--no-node-snapshot`
     environment variable to prevent the node process from crashing.
@@ -92,6 +113,8 @@ Once you have a running installation we can move to the first exercise!
     `NODE_OPTIONS=--no-node-snapshot yarn dev` each time you start the app, or
     by adding it to the `dev` script in the `package.json`.
 
+    The Codespace is running on Node 18, so you should not have this issue.
+
 ## Authentication
 
 For this workshop we will need to authenticate with GitHub in order to create
@@ -99,9 +122,13 @@ new repositories in organizations that you own. To do this we need a token for
 GitHub. We can re-use the token from the GitHub CLI for these purposes, this is
 the easiest way to get a token and the token is short lived.
 
+Before we can continue we need to stop the running backstage app, you can do this
+by pressing `ctrl+c` in the terminal where the app is running. Next we use the same terminal session to authenticate with GitHub.
+
 The GitHub CLI is already installed in this codespace, first you need to login.
 
 ```bash
+unset GITHUB_TOKEN
 gh auth login
 ```
 
