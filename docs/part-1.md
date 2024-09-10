@@ -73,7 +73,9 @@ file. You can add a new location under `catalog.locations` like below:
 ```
 
 You can then start your backstage instance and you should see the new template
-in the templates section.
+in the [templates section](http://localhost:3000/create?filters%5Bkind%5D=template&filters%5Buser%5D=all).
+
+![Cat scanner template](./assets/part_1_cat_scanner_template.png)
 
 ## Creating a repo
 
@@ -117,7 +119,9 @@ a new repo using the `publish:github` action. Add the following to your
     on your template and then clicking the refresh button in the about card.
 
 Now, go to your template, enter the repo details and it should create a new repo
-in GitHub for you.
+in GitHub for you. Use for "owner" your GitHub handle and choose a name for the repository. Once finished the template displays a link (TAKE ME TO THE REPO) to the newly created (private) repository.
+
+![Cat scanner repo](./assets/part_1_cat_scanner_repo.png)
 
 ??? Warning "Authentication"
 
@@ -126,5 +130,7 @@ in GitHub for you.
     section in Getting Started and ensure you have a valid token. You will only
     be able to make repos in an org that you have access to create public repos.
 
-The above package installed a lot more actions than just the `publish:github`,
-[you can browse the rest of the available templates here](http://localhost:3000/create/actions).
+!!! tip "Installed actions"
+
+    The above package installed a lot more actions than just the `publish:github`,
+    [you can browse the rest of the available templates here](http://localhost:3000/create/actions).
