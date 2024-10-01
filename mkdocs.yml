@@ -1,5 +1,6 @@
 site_name: "Automate All The Things"
 docs_dir: docs
+repo_url: https://github.com/philips-labs/automation-workshop
 theme:
   name: material
   icon:
