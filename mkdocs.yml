@@ -1,12 +1,14 @@
 site_name: "Automate All The Things"
 docs_dir: docs
 repo_url: https://github.com/philips-labs/automation-workshop
+edit_uri: edit/main/docs/
 theme:
   name: material
   icon:
     logo: material/robot-industrial
   features:
     - content.code.copy
+    - content.action.edit
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -52,3 +54,8 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+plugins:
+  - git-revision-date-localized
+  - git-committers:
+      repository: philips-labs/automation-workshop
+      branch: main
