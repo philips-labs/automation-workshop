@@ -34,76 +34,12 @@ Congratulations, you have created a new scaffolder plugin!
 
     You can see what other plugin types there are by running `yarn new`.
 
-## Install your plugin
+You will see that the plugin is automatically added to the `package.json` in
+`packages/backend` as a dependency. This is because the new plugin is a backend
+plugin.
 
-The plugin won't do much on its own, we need to install it in the backend so
-that it gets loaded correctly.
-
-Firstly, add your package as a reference to the
-`./packages/backend/package.json` in the dependencies section, like below:
-
-```json
-{
-  ...
-  "dependencies": {
-    ...
-    "@internal/backstage-plugin-scaffolder-backend-module-cat-scaffolder": "link:../../plugins/scaffolder-backend-module-cat-scaffolder",
-    ...
-  }
-}
-```
-
-And run `yarn install` to install the new package into the backend app.
-
-Then add the following code to `packages/backend/src/index.ts`. This will
-register your plugin with the backend and make it available to the scaffolder.
-
-```typescript
-...
-backend.add(
-  import("@internal/backstage-plugin-scaffolder-backend-module-cat-scaffolder")
-);
-```
-
-!!! tip
-
-    You may notice that this is underlined in red with an error. Don't worry
-    we will fix this in the next step.
-
-Now we need to export your action correctly from the plugin for the "new
-backend" system.
-
-Create a new file in your created plugin called `backstage/plugins/<your plugin>/src/module.ts` containing the following
-code
-
-```typescript
-import { createBackendModule } from "@backstage/backend-plugin-api";
-import { scaffolderActionsExtensionPoint } from "@backstage/plugin-scaffolder-node/alpha";
-import { createAcmeExampleAction } from "./actions";
-
-export const actionsModule = createBackendModule({
-  pluginId: "scaffolder",
-  moduleId: "cat-scaffolder",
-  register({ registerInit }) {
-    registerInit({
-      deps: {
-        scaffolder: scaffolderActionsExtensionPoint,
-      },
-      async init({ scaffolder }) {
-        scaffolder.addActions(createAcmeExampleAction());
-      },
-    });
-  },
-});
-```
-
-Then replace all the code in the `src\index.ts` file with the following:
-
-```typescript
-export { actionsModule as default } from "./module";
-```
-
-The red error in your backend should now disappear.
+It will also be automatically imported in the `packages/backend/src/index.ts`
+file so its ready to use straight away.
 
 To confirm everything is working correctly you can now run `yarn dev` to start
 backstage, navigate to [Installed Actions](http://localhost:3000/create/actions)
@@ -180,7 +116,8 @@ with a repo that has a single cat image in it.
 
 ??? tip "Hint"
 
-    Ensure you place the steps in the correct order. After running the automation you should see all the setps executed as well a link to the newly created repository.
+    Ensure you place the steps in the correct order. After running the automation
+    you should see all the steps executed as well a link to the newly created repository.
 
     ![Cat scanner repo with image](./assets/part_2_cat_scanner_repo.png)
 
