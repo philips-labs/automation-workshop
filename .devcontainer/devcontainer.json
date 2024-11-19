@@ -16,7 +16,7 @@
   "portsAttributes": {
     "3000": {
       "label": "Frontend",
-      "onAutoForward": "openPreview"
+      "onAutoForward": "openBrowserOnce"
     },
     "7007": {
       "label": "Backend",
