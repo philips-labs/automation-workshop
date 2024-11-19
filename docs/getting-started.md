@@ -66,8 +66,27 @@ in the next step.
     yarn install
     ```
 
-Once the yarn installation is complete, you can start the app by running the
-following command:
+Once the yarn installation is complete we need to modify the startup command so
+that it runs well inside of our codespace. Inside of your
+`backstage/package.json` you need to replace the `dev` script with the
+following:
+
+```json
+scripts: {
+    // ...
+    "dev": "yarn workspaces foreach -A --include backend --include app --parallel -j unlimited -v -i run start",
+    // ...
+}
+```
+
+This will allow both the front and backend to start at the same time without
+hitting any parallel limits imposed by yarn.
+
+Next we start the development environment by running the following command:
+
+```bash
+yarn dev
+```
 
 ??? Note "Without Yarn 4 Migration"
 
@@ -80,16 +99,14 @@ following command:
     yarn dev
     ```
 
-Next we start the development environment by running the following command:
-```bash
-yarn dev
-```
+Backstage will open in the browser and or VSCode pointing to `127.0.0.1` instead
+of `localhost`. Ensure you open the Backstage in your browser on
+`http://localhost:3000`.
 
-Backstage will open in the browser and or VSCode pointing to `127.0.0.1` instead of `localhost`. Ensure you open the Backstage in your browser on `http://localhost:3000`.
+![Backstage App](./assets/getting_started_app.png)
 
-![Backstage App](./assets/getting_started_app.png) 
-
-Once you have a running installation we can move to the first exercise! In case you don't see the Backstage app running, please check the following:
+Once you have a running installation we can move to the first exercise! In case
+you don't see the Backstage app running, please check the following:
 
 ??? Note "Working Directory"
 
@@ -129,8 +146,9 @@ new repositories in organizations that you own. To do this we need a token for
 GitHub. We can re-use the token from the GitHub CLI for these purposes, this is
 the easiest way to get a token and the token is short lived.
 
-Before we can continue we need to stop the running backstage app, you can do this
-by pressing `ctrl+c` in the terminal where the app is running. Next we use the same terminal session to authenticate with GitHub.
+Before we can continue we need to stop the running backstage app, you can do
+this by pressing `ctrl+c` in the terminal where the app is running. Next we use
+the same terminal session to authenticate with GitHub.
 
 The GitHub CLI is already installed in this codespace, first you need to login.
 
