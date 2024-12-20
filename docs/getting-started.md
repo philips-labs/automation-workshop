@@ -74,7 +74,7 @@ following:
 ```json
 scripts: {
     // ...
-    "dev": "yarn workspaces foreach -A --include backend --include app --parallel -j unlimited -v -i run start",
+    "dev": "NODE_OPTIONS=--no-node-snapshot yarn workspaces foreach -A --include backend --include app --parallel -j unlimited -v -i run start",
     // ...
 }
 ```
@@ -118,26 +118,6 @@ you don't see the Backstage app running, please check the following:
     Backstage is running two processes exposed in the the container on port 3000
     and 7007. The codespace is mapping the ports to your local ports. Ensure
     you have no other processes running on those ports and both ports are mapped, you may have to manually add port 7007 in the vscode UI.
-
-??? Note "Node 20"
-
-    If you are running node 20 you will need to set the `NODE_OPTIONS=--no-node-snapshot`
-    environment variable to prevent the node process from crashing.
-
-    You can do this in a few ways, such as running
-    `NODE_OPTIONS=--no-node-snapshot yarn dev` each time you start the app, or
-    by adding it to the `dev` script in the `package.json`.
-
-    The Codespace is running on Node 18, so you should not have this issue.
-
-??? Note Node 20
-
-    If you are running node 20 you will need to set the `NODE_OPTIONS=--no-node-snapshot`
-    environment variable to prevent the node process from crashing.
-
-    You can do this in a few ways, such as running
-    `NODE_OPTIONS=--no-node-snapshot yarn dev` each time you start the app, or
-    by adding it to the `dev` script in the `package.json`.
 
 ## Authentication
 
