@@ -52,16 +52,15 @@ optional but needed within our setup as the backstage folder will already exists
 due to container mounts. We also skip the install as we will upgrade to yarn 4
 in the next step.
 
-!!! tip "Yarn 4 Migration"
+!!! tip "Yarn 4 nodeLinker"
 
-    While we are here we will migrate to yarn 3 to help speed up node installs
-    in the future.
+    Using yarn 4 with the `node-modules` linker is the recommended way to run to speed up the installation process. 
+    This is especially useful in the Codespaces environment where the disk is slower than a local machine.
 
-    Run the following commands
+    Run the following commands:
 
     ```bash
     cd backstage
-    yarn set version berry && \
     yarn config set nodeLinker node-modules && \
     yarn install
     ```
@@ -87,17 +86,6 @@ Next we start the development environment by running the following command:
 ```bash
 yarn dev
 ```
-
-??? Note "Without Yarn 4 Migration"
-
-    If you did not migrate to yarn 4 you can run the following command to start
-    the app.
-
-    ```bash
-    cd backstage
-    yarn install
-    yarn dev
-    ```
 
 Backstage will open in the browser and or VSCode pointing to `127.0.0.1` instead
 of `localhost`. Ensure you open the Backstage in your browser on
