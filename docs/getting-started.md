@@ -44,69 +44,32 @@ Open the vscode terminal and run the following command and answer the questions
 when prompted, accept all defaults.
 
 ```bash
-npx @backstage/create-app@latest --path backstage --skip-install
+npx @backstage/create-app@latest --path backstage
 ```
 
 In this command we specify the path to create the app in, which is normally
 optional but needed within our setup as the backstage folder will already exists
-due to container mounts. We also skip the install as we will upgrade to yarn 4
-in the next step.
+due to container mounts.
 
-!!! tip "Yarn 4 Migration"
+This command will take a few minutes to run as it scaffolds the ann and restores
+all the packages using yarn.
 
-    While we are here we will migrate to yarn 3 to help speed up node installs
-    in the future.
-
-    Run the following commands
-
-    ```bash
-    cd backstage
-    yarn set version berry && \
-    yarn config set nodeLinker node-modules && \
-    yarn install
-    ```
-
-Once the yarn installation is complete we need to modify the startup command so
-that it runs well inside of our codespace. Inside of your
-`backstage/package.json` you need to replace the `dev` script with the
-following:
-
-```json
-scripts: {
-    // ...
-    "dev": "yarn workspaces foreach -A --include backend --include app --parallel -j unlimited -v -i run start",
-    // ...
-}
-```
-
-This will allow both the front and backend to start at the same time without
-hitting any parallel limits imposed by yarn.
-
-Next we start the development environment by running the following command:
+Once it is complete, we can start the development environment by running the
+following command:
 
 ```bash
 yarn dev
 ```
 
-??? Note "Without Yarn 4 Migration"
-
-    If you did not migrate to yarn 4 you can run the following command to start
-    the app.
-
-    ```bash
-    cd backstage
-    yarn install
-    yarn dev
-    ```
-
 Backstage will open in the browser and or VSCode pointing to `127.0.0.1` instead
-of `localhost`. Ensure you open the Backstage in your browser on
-`http://localhost:3000`.
+of `localhost`. **Ensure you open the Backstage in your browser on
+`http://localhost:3000`.**
 
 ![Backstage App](./assets/getting_started_app.png)
 
-Once you have a running installation we can move to the first exercise! In case
-you don't see the Backstage app running, please check the following:
+Once you have a running installation we can move to the first exercise (make
+sure you read the note on Authentication below first!). In case you don't see
+the Backstage app running, please check the following:
 
 ??? Note "Working Directory"
 
@@ -129,15 +92,6 @@ you don't see the Backstage app running, please check the following:
     by adding it to the `dev` script in the `package.json`.
 
     The Codespace is running on Node 18, so you should not have this issue.
-
-??? Note Node 20
-
-    If you are running node 20 you will need to set the `NODE_OPTIONS=--no-node-snapshot`
-    environment variable to prevent the node process from crashing.
-
-    You can do this in a few ways, such as running
-    `NODE_OPTIONS=--no-node-snapshot yarn dev` each time you start the app, or
-    by adding it to the `dev` script in the `package.json`.
 
 ## Authentication
 
