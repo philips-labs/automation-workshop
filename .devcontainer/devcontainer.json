@@ -60,5 +60,10 @@
     // Mounting volumes comes with permission issues, so we need to fix them
     // to make sure that we can write to the mounted volumes when running in devcontainers
     "fix_permissions": "sudo chown node backstage/node_modules && sudo chown node backstage/.yarn/cache"
+  },
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb",
+    "storage": "32gb"
   }
 }
