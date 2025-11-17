@@ -26,3 +26,5 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV PYTHON /usr/bin/python3
 
 RUN pip3 install setuptools
+
+ENV NODE_OPTIONS="${NODE_OPTIONS:-} --no-node-snapshot"
