@@ -21,7 +21,7 @@ To create a new scaffolder we can leverage the backstage templates by running
 
 ```bash
 cd backstage
-yarn new --select scaffolder-module
+yarn new --select scaffolder-backend-module
 ```
 
 This will create a new scaffolder module in the `plugins` directory. You can
@@ -41,9 +41,21 @@ plugin.
 It will also be automatically imported in the `packages/backend/src/index.ts`
 file so its ready to use straight away.
 
-To confirm everything is working correctly you can now run `yarn dev` to start
+To confirm everything is working correctly you can now run `yarn start` to start
 backstage, navigate to [Installed Actions](http://localhost:3000/create/actions)
 and you should see `acme:example` in the list. (we will change this later!)
+
+??? Warning "Broken module.ts"
+
+  As of the time of writing this workshop, there's a bug in the plugin generator.
+  Please go to `plugins/scaffolder-backend-module-cat-scaffolder/src/module.ts` and update the following import:
+  ```
+  // before
+  import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
+
+  // after
+  import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node';
+  ```
 
 ## Write your action
 
