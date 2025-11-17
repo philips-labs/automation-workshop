@@ -82,27 +82,8 @@ in the [templates section](http://localhost:3000/create?filters%5Bkind%5D=templa
 Now that we have a skeleton of our template we can enhance it to make it create
 a repo for us.
 
-There are a number of built in actions that we can take advantage of in our
-templates, but they are not all installed by default. To be able to create a
-GitHub repo, we need to install some GitHub actions into our backstage instance.
-First we need to install the plugin package using yarn:
-
-```bash
-cd packages/backend
-yarn add @backstage/plugin-scaffolder-backend-module-github
-```
-
-Then we then need to tell backstage to import this module into the backend,
-which will automatically register the actions and make them available to us. We
-need to add the following in `packages/backend/src/index.ts`
-
-```typescript
-backend.add(import("@backstage/plugin-scaffolder-backend-module-github"));
-```
-
-Now, we can then use the actions we just installed in our template and create a
-a new repo using the `publish:github` action. Add the following to your
-`template.yaml` in the `spec.steps` section:
+There are a number of built in actions that we can take advantage of in our templates.  
+To create a new repo, use the `publish:github` action by adding the following to your `template.yaml` in the `spec.steps` section:
 
 ```yaml
 - id: create-repo
@@ -132,7 +113,7 @@ After this point we do not need the newly created repository anymore, so you can
     section in Getting Started and ensure you have a valid token. You will only
     be able to make repos in an org that you have access to create public repos.
 
-!!! tip "Installed actions"
+!!! tip "Additional actions"
 
-    The above package installed a lot more actions than just the `publish:github`,
+    `publish:github` is only one of many pre-installed actions,
     [you can browse the rest of the available templates here](http://localhost:3000/create/actions).
