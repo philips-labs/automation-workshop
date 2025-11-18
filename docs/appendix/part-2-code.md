@@ -5,12 +5,12 @@ action will download a random cat image from the Cat API and save it to the
 workspace.
 
 ```typescript
-import { createTemplateAction } from "@backstage/plugin-scaffolder-node";
-import fs from "fs";
-import { Readable } from "stream";
-import { ReadableStream } from "stream/web";
-import { finished } from "stream/promises";
-import path from "path";
+import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
+import fs from 'fs';
+import { Readable } from 'stream';
+import { ReadableStream } from 'stream/web';
+import { finished } from 'stream/promises';
+import path from 'path';
 
 // types
 export interface CatResult {
@@ -20,49 +20,38 @@ export interface CatResult {
   height: number;
 }
 
-/**
- * Creates an `acme:example` Scaffolder action.
- *
- * @remarks
- *
- * See {@link https://example.com} for more information.
- *
- * @public
- */
-export function createAcmeExampleAction() {
+export function createExampleAction() {
   // For more information on how to define custom actions, see
   //   https://backstage.io/docs/features/software-templates/writing-custom-actions
-  return createTemplateAction<{
-    myParameter: string;
-  }>({
+  return createTemplateAction({
     id: "catscanner:randomcat",
     description: "Downloads a random cat image into the workspace",
     schema: {
       input: {
-        type: "object",
-        required: [],
-        properties: {},
+        catCount: z => z.number({ description: 'The number of cat images to download' })
       },
     },
     async handler(ctx) {
       ctx.logger.info(
-        `Running example template with parameters: ${ctx.input.myParameter}`
+        `Running example template with parameters: ${ctx.input.catCount}`
       );
 
-      const catResult = await fetch(
-        "https://api.thecatapi.com/v1/images/search"
-      );
+      for (let i = 0; i < ctx.input.catCount; i++) {
+        const catResult = await fetch(
+          'https://api.thecatapi.com/v1/images/search',
+        );
 
-      const catData: Record<string, CatResult> = await catResult.json();
+        const catData: Record<string, CatResult> = await catResult.json();
 
-      const stream = fs.createWriteStream(
-        path.join(ctx.workspacePath, "catimage.jpeg")
-      );
-      const { body } = await fetch(catData[0].url);
+        const stream = fs.createWriteStream(
+          path.join(ctx.workspacePath, `catimage${i}.jpeg`),
+        );
+        const { body } = await fetch(catData[0].url);
 
-      await finished(Readable.fromWeb(body as ReadableStream).pipe(stream));
+        await finished(Readable.fromWeb(body as ReadableStream).pipe(stream));
 
-      ctx.logger.info("Cat image downloaded");
+        ctx.logger.info(`Cat image ${i} downloaded`);
+      }
     },
   });
 }
