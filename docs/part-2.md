@@ -69,21 +69,17 @@ removing the required inputs and properties definitions. We don't need them
 
 ```typescript
 ...
-  return createTemplateAction<{
-    myParameter: string;
-  }>({
+  return createTemplateAction({
     id: "catscanner:randomcat",
     description: "Downloads a random cat image into the workspace",
     schema: {
       input: {
-        type: "object",
-        required: [],
-        properties: {},
+        catCount: z => z.number({ description: 'The number of cat images to download' })
       },
     },
     async handler(ctx) {
       ctx.logger.info(
-        `Running example template with parameters: ${ctx.input.myParameter}`
+        `Running example template with parameters: ${ctx.input.catCount}`
       );
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -93,7 +89,7 @@ removing the required inputs and properties definitions. We don't need them
 ```
 
 Now need to implement the action code in the `handler` function in
-`src/actions/example/example.ts`,. This is where we get the cat image from the
+`src/actions/example.ts`,. This is where we get the cat image from the
 API and download it to the working directory.
 
 The API that we will use is `https://api.thecatapi.com/v1/images/search`, this
@@ -119,6 +115,8 @@ You can add this action to the template by adding the following to the
 - id: download-cat-image
   name: Download Cat Image
   action: catscanner:randomcat
+  input:
+    catCount: 1
 ```
 
 You can now test your cat downloading skills in the template! You should end up
