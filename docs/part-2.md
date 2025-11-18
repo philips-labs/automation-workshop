@@ -45,17 +45,17 @@ To confirm everything is working correctly you can now run `yarn start` to start
 backstage, navigate to [Installed Actions](http://localhost:3000/create/actions)
 and you should see `acme:example` in the list. (we will change this later!)
 
-??? Warning "Broken module.ts"
+!!! Warning "Broken module.ts"
 
-  As of the time of writing this workshop, there's a bug in the plugin generator.
-  Please go to `plugins/scaffolder-backend-module-cat-scaffolder/src/module.ts` and update the following import:
-  ```
-  // before
-  import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
+    As of the time of writing this workshop, there's a bug in the plugin generator.
+    Please go to `plugins/scaffolder-backend-module-cat-scaffolder/src/module.ts` and update the following import:
+    ```
+    // before
+    import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
 
-  // after
-  import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node';
-  ```
+    // after
+    import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node';
+    ```
 
 ## Write your action
 
