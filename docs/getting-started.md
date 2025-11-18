@@ -58,12 +58,8 @@ Once it is complete, we can start the development environment by running the
 following command:
 
 ```bash
-yarn dev
+yarn start
 ```
-
-Backstage will open in the browser and or VSCode pointing to `127.0.0.1` instead
-of `localhost`. **Ensure you open the Backstage in your browser on
-`http://localhost:3000`.**
 
 ![Backstage App](./assets/getting_started_app.png)
 
