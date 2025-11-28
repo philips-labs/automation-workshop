@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye
+FROM mcr.microsoft.com/devcontainers/typescript-node:1-22-bullseye
 
 # Install isolate-vm dependencies, these are needed by the @backstage/plugin-scaffolder-backend.
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -26,3 +26,5 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 ENV PYTHON /usr/bin/python3
 
 RUN pip3 install setuptools
+
+ENV NODE_OPTIONS="${NODE_OPTIONS:-} --no-node-snapshot"

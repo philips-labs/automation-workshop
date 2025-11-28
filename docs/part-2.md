@@ -21,7 +21,7 @@ To create a new scaffolder we can leverage the backstage templates by running
 
 ```bash
 cd backstage
-yarn new --select scaffolder-module
+yarn new --select scaffolder-backend-module
 ```
 
 This will create a new scaffolder module in the `plugins` directory. You can
@@ -41,9 +41,21 @@ plugin.
 It will also be automatically imported in the `packages/backend/src/index.ts`
 file so its ready to use straight away.
 
-To confirm everything is working correctly you can now run `yarn dev` to start
+To confirm everything is working correctly you can now run `yarn start` to start
 backstage, navigate to [Installed Actions](http://localhost:3000/create/actions)
 and you should see `acme:example` in the list. (we will change this later!)
+
+!!! Warning "Broken module.ts"
+
+    As of the time of writing this workshop, there's a bug in the plugin generator.
+    Please go to `plugins/scaffolder-backend-module-cat-scaffolder/src/module.ts` and update the following import:
+    ```
+    // before
+    import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
+
+    // after
+    import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node';
+    ```
 
 ## Write your action
 
@@ -57,21 +69,17 @@ removing the required inputs and properties definitions. We don't need them
 
 ```typescript
 ...
-  return createTemplateAction<{
-    myParameter: string;
-  }>({
+  return createTemplateAction({
     id: "catscanner:randomcat",
     description: "Downloads a random cat image into the workspace",
     schema: {
       input: {
-        type: "object",
-        required: [],
-        properties: {},
+        catCount: z => z.number({ description: 'The number of cat images to download' })
       },
     },
     async handler(ctx) {
       ctx.logger.info(
-        `Running example template with parameters: ${ctx.input.myParameter}`
+        `Running example template with parameters: ${ctx.input.catCount}`
       );
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -81,7 +89,7 @@ removing the required inputs and properties definitions. We don't need them
 ```
 
 Now need to implement the action code in the `handler` function in
-`src/actions/example/example.ts`,. This is where we get the cat image from the
+`src/actions/example.ts`,. This is where we get the cat image from the
 API and download it to the working directory.
 
 The API that we will use is `https://api.thecatapi.com/v1/images/search`, this
@@ -107,6 +115,8 @@ You can add this action to the template by adding the following to the
 - id: download-cat-image
   name: Download Cat Image
   action: catscanner:randomcat
+  input:
+    catCount: 1
 ```
 
 You can now test your cat downloading skills in the template! You should end up
