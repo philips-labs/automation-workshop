@@ -130,3 +130,6 @@ dist
 .pnp.*
 
 site/**
+
+# macOS specific filesystem cache file
+.DS_Store

@@ -16,25 +16,13 @@ allow us to create a new field type that can be used in the template.
 
 ```bash
 cd backstage
-yarn new --select plugin-react
+yarn new --select frontend-plugin
 ```
 
 We can name our plugin whatever we like, in this example we will call it
 `catscanner`.
 
-Now the plugin is created, to be able to use it, we need to add the plugin to
-the `packages/app/package.json` file. This will make the plugin available to the
-frontend (we will register out new field extension later).
-
-```json
-    "dependencies": {
-        ...
-        "@internal/backstage-plugin-catscanner-react": "link:../../plugins/catscanner-react",
-        ...
-    }
-```
-
-Now run `yarn install` to install the new plugin into the frontend app.
+You will see that the plugin is automatically added to the package.json in packages/app as a dependency.   
 
 ## Implement the field extension
 
@@ -64,12 +52,12 @@ We can create a Field Extension by using the `createScaffolderFieldExtension`
 API provided by backstage. But this comes in a few different parts, that we will
 put into different files to keep things easy.
 
-We will create a new folder in `plugins/catscanner-react/src/components` to hold
+We will create a new folder in `plugins/catscanner/src/components` to hold
 all of the files related to the extension. lets call this `RandomCatPix`.
 
 ```bash
 cd backstage/
-mkdir -p plugins/catscanner-react/src/components/RandomCatPix
+mkdir -p plugins/catscanner/src/components/RandomCatPix
 ```
 
 Inside this we need to create the primary files that will contain the react
@@ -85,7 +73,7 @@ We can create all these files by running the following commands:
 
 ```bash
 # go to the root of the react plugin
-cd backstage/plugins/catscanner-react
+cd backstage/plugins/catscanner
 touch src/components/RandomCatPix/RandomCatPixExtension.tsx \
   src/components/RandomCatPix/validation.ts \
   src/components/RandomCatPix/schema.ts \
@@ -197,17 +185,17 @@ in the `RandomCatPix` folder.
 export { RandomCatPixFieldExtension } from "./extensions";
 ```
 
-Next we do the same in the `components` folder to export the `RandomCatPix`.
+Next we do the same in the `src` folder to export the `RandomCatPix`.
 
 ```typescript
-// plugins/catscanner-react/src/components/index.ts
-export * from "./RandomCatPix";
+// plugins/catscanner-react/src/index.ts
+export * from "./components/RandomCatPix";
 ```
 
 !!! tip "Previewing your component"
 
     You can preview the extensions you write in the Backstage UI using the
-    Custom Field Explorer (accessible via the /create/edit route by default)
+    Custom Field Explorer (accessible via the [/create/edit](http://localhost:3000/create/edit) route by default)
 
     To do this you need to first register your extension using the instructions
     in the next section below.
@@ -251,7 +239,7 @@ so that the scaffolder is aware of it.
 
 ```tsx
 import { ScaffolderFieldExtensions } from "@backstage/plugin-scaffolder-react";
-import { RandomCatPixFieldExtension } from "@internal/backstage-plugin-catscanner-react";
+import { RandomCatPixFieldExtension } from "@internal/plugin-catscanner";
 
 const routes = (
   <FlatRoutes>
