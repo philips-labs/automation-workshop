@@ -2,37 +2,12 @@
 
 ## Getting Started
 
-To get started with this workshop we are going to use
-[Codespaces](https://github.com/features/codespaces) to set up our development
-environment.
+We are going to start by checking the repository out locally.
 
-!!! tip "Codespaces plugin for VSCode"
+Afterwards, you can simply open the checked out folder in Visual Studio Code.  
+If the Dev Container extension is properly installed, the left bottom of the IDE will show "Dev Container:"
 
-    Before we start you should install the Codespaces plugin into your local VSCode
-    installation, this is because we will later connect your vscode instance to the
-    codespace in GitHub.
-
-To use Codespaces we can go to the code button on the
-[workshop repository](https://github.com/philips-labs/automation-workshop) and
-select the Codespaces tab. Clicking create an new Codespaces will start out the
-building and starting of your own Codespace. After a while you will have running
-and working environment which you can see from the VSCode instance in your
-browser.
-
-You must then open your local vscode and press `ctrl/cmd+shift+p` and search for
-`connect to codespace`. If you have not logged into GitHub you may be prompted
-to login, once logged in you will need to select which codespace you want to
-connect to. It will take a few seconds to connect and then you will see all of
-the files from the codespace in your local vscode.
-
-Once have you connected your vscode you can then continue with the rest of the
-instructions here.
-
-??? Note "Codespaces"
-
-    During the workshop we use GitHub Codespaces to provide a consistent and easy to
-    use environment for the workshop. GitHub is charging you for Codespaces usage, but
-    also provide a free tier including 120 core-hours per month. You can check the details on the [GitHub billing page](https://github.com/settings/billing/summary). To avoid you make unnecessary costs, Codespaces will be automatically stopped after 30 minutes of inactivity. Check the [Codespace settings page](https://github.com/settings/codespaces) to see your Codespaces and adjust settings.
+![](./assets/devcontainer_indicator.png)
 
 ## Creating a new Backstage app
 
@@ -77,6 +52,17 @@ the Backstage app running, please check the following:
     Backstage is running two processes exposed in the the container on port 3000
     and 7007. The codespace is mapping the ports to your local ports. Ensure
     you have no other processes running on those ports and both ports are mapped, you may have to manually add port 7007 in the vscode UI.
+
+!!! Warning "Known macOS issue"
+    
+    Backstage has a known issue on macOS that causes the backstage website to not load, see [here](https://github.com/backstage/backstage/issues/24888). To work around this, please go to `backstage/app-config.yaml` and update the `app` block by explicitly setting the host:
+    ```
+    app:
+        title: Scaffolded Backstage App
+        baseUrl: http://localhost:3000
+        listen:
+            host: 0.0.0.0
+    ```
 
 ## Authentication
 

@@ -40,6 +40,7 @@ nav:
       - Part 3 - Customize the UI: "part-3.md"
   - Clean up: "clean-up.md"
   - Appendix:
+      - Codespace Setup: "appendix/codespace-setup.md"
       - Part 2 - Code: "appendix/part-2-code.md"
       - Part 3 - Code: "appendix/part-3-code.md"
   - (Extra) Fundamentals:

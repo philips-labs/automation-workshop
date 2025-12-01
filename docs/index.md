@@ -9,9 +9,9 @@ including some custom tasks as part of that process.
 We will be automating using only the following tools:
 
 - GitHub Account
-- GitHub Codespaces
+- Docker
 - VSCode and
-  [Codespaces Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces)
+  [Dev Containers extensions](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 ## Exercises
 
