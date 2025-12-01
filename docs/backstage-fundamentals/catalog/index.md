@@ -82,12 +82,12 @@ Alternatively, you can add your repository to the `app-config.yaml` file in your
 
 ```yaml
 catalog:
+  rules:
+    - allow: [Component, System, API, Resource, Location]
   locations:
     # Existing locations...
     - type: url
       target: https://github.com/YOUR_USERNAME/backstage-demo/blob/main/catalog-info.yaml
-      rules:
-        - allow: [Component]
 ```
 
 After updating the config, restart your Backstage app for the changes to take effect.

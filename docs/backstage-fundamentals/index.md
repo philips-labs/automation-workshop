@@ -15,7 +15,7 @@ In this practical guide, you'll learn how to:
 
 Before you begin, make sure you have:
 
-- Node.js (version 16 or later)
+- Node.js (version 18 or later)
 - Yarn
 - Git
 - A GitHub account (for the GitHub integration part)

@@ -6,12 +6,13 @@
     // Path is relative to the devcontainer.json file.
     "dockerfile": "Dockerfile"
   },
-  "runArgs": [
-    // Disable IPv6 to prevent certain issues with Backstage 
-    // https://github.com/backstage/backstage/issues/24888
-    "--sysctl", "net.ipv6.conf.all.disable_ipv6=1",
-    "--sysctl", "net.ipv6.conf.default.disable_ipv6=1"
-  ],
+  // "runArgs": [
+  //   // Disable IPv6 to prevent certain issues with Backstage 
+  //   // https://github.com/backstage/backstage/issues/24888
+  //   // Note: These sysctl settings are incompatible with Codespaces' host networking mode
+  //   "--sysctl", "net.ipv6.conf.all.disable_ipv6=1",
+  //   "--sysctl", "net.ipv6.conf.default.disable_ipv6=1"
+  // ],
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },

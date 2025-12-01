@@ -17,7 +17,7 @@ brew install python  # macOS
 sudo apt install python3 python3-pip  # Ubuntu/Debian
 
 # Install MkDocs and plugins
-pip install mkdocs mkdocs-material mkdocs-techdocs-core
+pip install mkdocs mkdocs-material mkdocs-techdocs-core==1.2.1
 ```
 
 ### Step 2: Add Documentation to Your Repository
@@ -41,6 +41,14 @@ nav:
 
 plugins:
   - techdocs-core
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.tabbed
+  - pymdownx.emoji
 EOF
 
 # Create a simple home page
@@ -130,6 +138,35 @@ git push
 3. Click on the "Docs" tab
 
 You should now see your documentation rendered beautifully in Backstage!
+
+### Adding TechDocs Addons
+
+TechDocs supports addons that enhance the documentation experience. To add them:
+
+1. Install the required packages:
+
+```bash
+yarn add @backstage/plugin-techdocs-react @backstage/plugin-techdocs-module-addons-contrib
+```
+
+2. Update your App.tsx to include the addons:
+
+```tsx
+import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
+import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+
+// Inside your AppRoutes component
+<Route 
+  path="/docs/:namespace/:kind/:name/*" 
+  element={<TechDocsReaderPage />}
+>
+  <TechDocsAddons>
+    <ReportIssue />
+  </TechDocsAddons>
+</Route>
+```
+
+This adds a "Report Issue" button that allows users to create GitHub issues directly from the documentation.
 
 ## Making Documentation Valuable
 

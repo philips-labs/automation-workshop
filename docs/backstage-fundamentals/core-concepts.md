@@ -21,7 +21,7 @@ Let's start by installing a vanilla Backstage instance. This will give you a wor
 
 Make sure you have the following installed:
 
-- Node.js (version 16 or later)
+- Node.js (version 18 or later)
 - Yarn
 - Git
 
@@ -50,14 +50,14 @@ Once the installation is complete, navigate to your app directory and start the 
 cd my-backstage-app
 
 # Start the app
-yarn dev
+yarn start
 ```
 
-!!! tip "Node.js 20+ Users"
-    If you're using Node.js 20 or later, you'll need to set the `NODE_OPTIONS` environment variable:
+!!! tip "Node.js Version Compatibility"
+    Backstage is tested with Node.js 18 and 20. If you're using Node.js 20, you might need to set the `NODE_OPTIONS` environment variable:
     ```bash
     export NODE_OPTIONS="--no-node-snapshot"
-    yarn dev
+    yarn start
     ```
 
 ### Step 3: Access Your Backstage App
@@ -107,6 +107,7 @@ auth:
       development:
         clientId: ${AUTH_GITHUB_CLIENT_ID}
         clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+        enterpriseInstanceUrl: # Optional URL for GitHub Enterprise instances
 ```
 
 ### Step 3: Set Environment Variables
@@ -123,10 +124,31 @@ AUTH_GITHUB_CLIENT_SECRET=your-client-secret
 Stop your running Backstage instance (Ctrl+C) and start it again:
 
 ```bash
-yarn dev
+yarn start
 ```
 
 Now you should be able to log in with your GitHub account.
+
+## Backend System
+
+Backstage has introduced a new backend system that simplifies plugin setup. The new system is used by default in new Backstage applications.
+
+In the new backend system, your `packages/backend/src/index.ts` file will look like this:
+
+```typescript
+import { createBackend } from '@backstage/backend-defaults';
+
+const backend = createBackend();
+
+// Add plugins by importing them
+backend.add(import('@backstage/plugin-catalog-backend'));
+backend.add(import('@backstage/plugin-techdocs-backend'));
+// Add more plugins as needed
+
+backend.start();
+```
+
+This replaces the older approach that required more boilerplate code.
 
 ## Next Steps
 
