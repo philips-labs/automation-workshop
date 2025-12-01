@@ -27,7 +27,7 @@
     },
     "7007": {
       "label": "Backend",
-      "onAutoForward": "ignore"
+      "onAutoForward": "silent"
     }
   },
 
