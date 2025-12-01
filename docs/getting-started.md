@@ -9,6 +9,9 @@ If the Dev Container extension is properly installed, the left bottom of the IDE
 
 ![](./assets/devcontainer_indicator.png)
 
+If it does not, please make sure that the `Dev Containers` VSCode extension is installed 
+and then hit `ctrl/cmd+shift+p` and search for "Dev Containers: Reopen in Container".
+
 ## Creating a new Backstage app
 
 Once you have a running environment you will now need to create a new backstage
