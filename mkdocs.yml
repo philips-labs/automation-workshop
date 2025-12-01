@@ -42,6 +42,11 @@ nav:
   - Appendix:
       - Part 2 - Code: "appendix/part-2-code.md"
       - Part 3 - Code: "appendix/part-3-code.md"
+  - (Extra) Fundamentals:
+      - Overview: "backstage-fundamentals/index.md"
+      - Core Concepts: "backstage-fundamentals/core-concepts.md"
+      - Software Catalog: "backstage-fundamentals/catalog/index.md"
+      - TechDocs: "backstage-fundamentals/techdocs/index.md"
 markdown_extensions:
   - admonition
   - pymdownx.details
