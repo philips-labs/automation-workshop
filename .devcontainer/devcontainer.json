@@ -23,11 +23,13 @@
   "portsAttributes": {
     "3000": {
       "label": "Frontend",
-      "onAutoForward": "openBrowserOnce"
+      "onAutoForward": "openBrowserOnce",
+      "requireLocalPort": true
     },
     "7007": {
       "label": "Backend",
-      "onAutoForward": "silent"
+      "onAutoForward": "silent",
+      "requireLocalPort": true
     }
   },
 
