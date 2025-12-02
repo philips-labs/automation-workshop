@@ -15,7 +15,11 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && \
     apt-get install -y --no-install-recommends libsqlite3-dev
 
-
+# Configure umbrella proxy for users behind this particular corporate proxy
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+RUN mkdir -p /usr/local/share/ca-certificates/extra && \
+    curl -o /usr/local/share/ca-certificates/extra/Cisco_Umbrella_Root_CA.crt https://d36u8deuxga9bo.cloudfront.net/certificates/Cisco_Umbrella_Root_CA.cer && \
+    update-ca-certificates
 RUN corepack enable
 
 ENV VIRTUAL_ENV=/opt/venv
