@@ -56,9 +56,10 @@ the Backstage app running, please check the following:
     and 7007. The codespace is mapping the ports to your local ports. Ensure
     you have no other processes running on those ports and both ports are mapped, you may have to manually add port 7007 in the vscode UI.
 
-!!! Warning "Known macOS issue"
+!!! Warning "Known IPv6 issue"
     
-    Backstage has a known issue on macOS that causes the backstage website to not load, see [here](https://github.com/backstage/backstage/issues/24888). To work around this, please go to `backstage/app-config.yaml` and update the `app` block by explicitly setting the host:
+    Backstage has a known issue with IPv6 that causes the backstage website to not load, see [here](https://github.com/backstage/backstage/issues/24888). 
+    To work around this, please go to `backstage/app-config.yaml` and update the `app` block by explicitly setting the host:
     ```
     app:
         title: Scaffolded Backstage App
