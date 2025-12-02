@@ -28,3 +28,8 @@ ENV PYTHON /usr/bin/python3
 RUN pip3 install setuptools
 
 ENV NODE_OPTIONS="${NODE_OPTIONS:-} --no-node-snapshot"
+
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+RUN mkdir -p /usr/local/share/ca-certificates/extra && \
+    curl -o /usr/local/share/ca-certificates/extra/Cisco_Umbrella_Root_CA.crt https://d36u8deuxga9bo.cloudfront.net/certificates/Cisco_Umbrella_Root_CA.cer && \
+    update-ca-certificates
