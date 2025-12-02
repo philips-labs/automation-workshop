@@ -67,12 +67,6 @@ the Backstage app running, please check the following:
             host: 0.0.0.0
     ```
 
-!!! Warning "Cisco Umbrella causes TLS errors"
-
-    If you see TLS errors when running `yarn` commands, this is most likely due to the Cisco Umbrella service trying to inject a custom SSL certificate.  
-    To work around this issue, please first export the following environment variable:
-    `export NODE_TLS_REJECT_UNAUTHORIZED=0`
-
 ## Authentication
 
 For this workshop we will need to authenticate with GitHub in order to create
